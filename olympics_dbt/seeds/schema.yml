@@ -1,0 +1,389 @@
+version: 2
+
+seeds:
+  # raw_discontinued_summer_sports
+  - name: raw_discontinued_summer_sports
+    description: >
+      Disciplines that appeared in at least one Summer Olympic Games but are
+      no longer contested, including the year(s) they were held and a full
+      medal breakdown.
+    config:
+      column_types:
+        discipline:              varchar
+        contestes:               varchar
+        number_of_olympics:      integer
+        number_of_gold_medals:   integer
+        number_of_silver_medals: integer
+        number_of_bronze_medals: integer
+        total:                   integer
+    columns:
+      - name: discipline
+        description: Name of the discontinued Olympic discipline.
+        tests:
+          - not_null
+          - unique
+
+      - name: contestes
+        description: Year the discipline was contested.
+        tests:
+          - not_null
+
+      - name: number_of_olympics
+        description: Total number of Olympic Games in which the discipline appeared.
+        tests:
+          - not_null
+
+      - name: number_of_gold_medals
+        description: Total gold medals awarded across all editions of the discipline.
+        tests:
+          - not_null
+
+      - name: number_of_silver_medals
+        description: Total silver medals awarded across all editions of the discipline.
+        tests:
+          - not_null
+
+      - name: number_of_bronze_medals
+        description: Total bronze medals awarded across all editions of the discipline.
+        tests:
+          - not_null
+
+      - name: total
+        description: Total medals (gold + silver + bronze) awarded across all editions.
+        tests:
+          - not_null
+
+  # raw_medalists_age_by_sport
+  - name: raw_medalists_age_by_sport
+    description: Age-related records for Olympic medalists, grouped by sport. Each row captures a specific age milestone (e.g. youngest gold medalist, oldest medalist) along with the athlete and contextual details.
+    config:
+      column_types:
+        sport:     varchar
+        title:     varchar
+        age:       varchar
+        medalist:  varchar
+        details:   varchar
+        notes:     varchar
+    columns:
+      - name: sport
+        description: Olympic sport the record belongs to.
+        tests:
+          - not_null
+
+      - name: title
+        description: Description of the age record (e.g. "Youngest freestyle skiing gold medalist").
+        tests:
+          - not_null
+
+      - name: age
+        description: Age of the medalist at the time of the achievement, expressed as a human-readable string.
+        tests:
+          - not_null
+
+      - name: medalist
+        description: Full name and nationality of the athlete who holds the record.
+        tests:
+          - not_null
+
+      - name: details
+        description: Optional additional context about the record or event.
+
+      - name: notes
+        description: Footnotes or clarifications (e.g. disputed records, shared records).
+
+
+  # raw_summer_sports_medalist_by_olympiad
+  - name: raw_summer_sports_medalist_by_olympiad
+    description: Medal statistics for each Summer Olympic Games edition, including the host city, number of medal events, medal counts, and the athletes who collected the most medals and gold medals at that edition.
+    config:
+      column_types:
+        games:                        integer
+        medal_winners:                varchar
+        medal_table:                  varchar
+        host:                         varchar
+        number_medal_events:          varchar
+        number_of_gold_medals:        integer
+        number_of_silver_medals:      integer
+        number_of_bronze_medals:      integer
+        total:                        varchar
+        athlete_with_most_medals:     varchar
+        athlete_with_most_gold_medals: varchar
+    columns:
+      - name: games
+        description: Year the Summer Olympic Games were held.
+        tests:
+          - not_null
+          - unique
+
+      - name: medal_winners
+        description: >
+          Hyperlink label or identifier pointing to the full list of medal
+          winners for that edition.
+
+      - name: medal_table
+        description: >
+          Hyperlink label or identifier pointing to the medal table for that
+          edition.
+
+      - name: host
+        description: Host city and country.
+        tests:
+          - not_null
+
+      - name: number_medal_events
+        description: >
+          Number of medal events at that Games. Stored as varchar because some
+          values include Wikipedia-style footnote markers.
+        tests:
+          - not_null
+
+      - name: number_of_gold_medals
+        description: Total gold medals awarded at this edition.
+        tests:
+          - not_null
+
+      - name: number_of_silver_medals
+        description: Total silver medals awarded at this edition.
+        tests:
+          - not_null
+
+      - name: number_of_bronze_medals
+        description: Total bronze medals awarded at this edition.
+        tests:
+          - not_null
+
+      - name: total
+        description: Total medals (gold + silver + bronze) awarded at this edition.
+        tests:
+          - not_null
+
+      - name: athlete_with_most_medals
+        description: >
+          Athlete(s) who won the most medals at this edition, with medal
+          breakdown in parentheses.
+
+      - name: athlete_with_most_gold_medals
+        description: >
+          Athlete(s) who won the most gold medals at this edition, with medal
+          breakdown in parentheses.
+
+
+  # raw_summer_sports_medalist_by_sport
+  - name: raw_summer_sports_medalist_by_sport
+    description: >
+      Cumulative medal statistics for every discipline contested at the Summer
+      Olympic Games, aggregated across all editions in which the discipline
+      appeared.
+    config:
+      column_types:
+        discipline:                    varchar
+        contestes:                     varchar
+        number_of_olympics:            integer
+        number_of_medals:              integer
+        number_of_gold_medals:         integer
+        number_of_silver_medals:       integer
+        number_of_bronze_medals:       integer
+        total:                         integer
+        athlete_with_most_medals:      varchar
+        athlete_with_most_gold_medals: varchar
+    columns:
+      - name: discipline
+        description: Name of the Summer Olympic discipline.
+        tests:
+          - not_null
+          - unique
+
+      - name: contestes
+        description: >
+          Year range(s) in which the discipline was contested.
+        tests:
+          - not_null
+
+      - name: number_of_olympics
+        description: >
+          Total number of Olympic Games editions in which the discipline
+          appeared.
+        tests:
+          - not_null
+
+      - name: number_of_medals
+        description: Number of distinct medal event types in the discipline.
+        tests:
+          - not_null
+
+      - name: number_of_gold_medals
+        description: Cumulative gold medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: number_of_silver_medals
+        description: Cumulative silver medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: number_of_bronze_medals
+        description: Cumulative bronze medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: total
+        description: Cumulative total medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: athlete_with_most_medals
+        description: >
+          All-time leading medalist in the discipline with nationality and medal breakdown.
+
+      - name: athlete_with_most_gold_medals
+        description: >
+          All-time leading gold medalist in the discipline with nationality
+          and medal breakdown.
+
+
+  # raw_winter_sports_medalist_by_olympiad
+  - name: raw_winter_sports_medalist_by_olympiad
+    description: >
+      Medal statistics for each Winter Olympic Games edition, including the
+      host city, number of medal events, medal counts, and the athletes who
+      collected the most medals and gold medals at that edition.
+    config:
+      column_types:
+        games:                         integer
+        medal_winners:                 varchar
+        medal_table:                   varchar
+        host:                          varchar
+        number_medal_events:           integer
+        number_of_gold_medals:         integer
+        number_of_silver_medals:       integer
+        number_of_bronze_medals:       integer
+        total:                         integer
+        athlete_with_most_medals:      varchar
+        athlete_with_most_gold_medals: varchar
+    columns:
+      - name: games
+        description: Year the Winter Olympic Games were held.
+        tests:
+          - not_null
+          - unique
+
+      - name: medal_winners
+        description: >
+          Hyperlink label or identifier pointing to the full list of medal
+          winners for that edition.
+
+      - name: medal_table
+        description: >
+          Hyperlink label or identifier pointing to the medal table for that
+          edition.
+
+      - name: host
+        description: Host city and country.
+        tests:
+          - not_null
+
+      - name: number_medal_events
+        description: Number of medal events at that Winter Games edition.
+        tests:
+          - not_null
+
+      - name: number_of_gold_medals
+        description: Total gold medals awarded at this edition.
+        tests:
+          - not_null
+
+      - name: number_of_silver_medals
+        description: Total silver medals awarded at this edition.
+        tests:
+          - not_null
+
+      - name: number_of_bronze_medals
+        description: Total bronze medals awarded at this edition.
+        tests:
+          - not_null
+
+      - name: total
+        description: Total medals (gold + silver + bronze) awarded at this edition.
+        tests:
+          - not_null
+
+      - name: athlete_with_most_medals
+        description: >
+          Athlete(s) who won the most medals at this edition, with medal
+          breakdown in parentheses.
+
+      - name: athlete_with_most_gold_medals
+        description: >
+          Athlete(s) who won the most gold medals at this edition, with medal
+          breakdown in parentheses.
+
+
+
+  # raw_winter_sports_medalist_by_sport
+  - name: raw_winter_sports_medalist_by_sport
+    description: >
+      Cumulative medal statistics for every discipline contested at the Winter
+      Olympic Games, aggregated across all editions in which the discipline
+      appeared.
+    config:
+      column_types:
+        discipline:                    varchar
+        contestes:                     varchar
+        number_of_olympics:            integer
+        number_of_medals:              integer
+        number_of_gold_medals:         integer
+        number_of_silver_medals:       integer
+        number_of_bronze_medals:       integer
+        total:                         integer
+        athlete_with_most_medals:      varchar
+        athlete_with_most_gold_medals: varchar
+    columns:
+      - name: discipline
+        description: Name of the Winter Olympic discipline.
+        tests:
+          - not_null
+          - unique
+
+      - name: contestes
+        description: >
+          Year range(s) in which the discipline was contested.
+          - not_null
+
+      - name: number_of_olympics
+        description: >
+          Total number of Winter Olympic Games editions in which the discipline appeared.
+        tests:
+          - not_null
+
+      - name: number_of_medals
+        description: Number of distinct medal event types in the discipline.
+        tests:
+          - not_null
+
+      - name: number_of_gold_medals
+        description: Cumulative gold medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: number_of_silver_medals
+        description: Cumulative silver medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: number_of_bronze_medals
+        description: Cumulative bronze medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: total
+        description: Cumulative total medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: athlete_with_most_medals
+        description: >
+          All-time leading medalist in the discipline with nationality and medal breakdown.
+
+      - name: athlete_with_most_gold_medals
+        description: >
+          All-time leading gold medalist in the discipline with nationality and medal breakdown.
