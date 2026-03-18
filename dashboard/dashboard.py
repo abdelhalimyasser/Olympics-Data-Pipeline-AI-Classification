@@ -123,8 +123,6 @@ ml_detailed_data = {
     'F1-Score (%)': [92.30, 85.71, 85.71, 85.71, 85.71, 69.14]
 }            
 
-importances = active_model.feature_importances_ * 100
-
 ml_df = pd.DataFrame(ml_detailed_data).set_index('Algorithm')
 fig16 = px.imshow(ml_df, text_auto='.2f', aspect="auto", color_continuous_scale='RdYlGn', title='🤖 AI Models Performance Heatmap (Strengths vs Weaknesses)')
 fig16.update_layout(xaxis_title="Evaluation Metrics", yaxis_title="Machine Learning Models", height=500)
