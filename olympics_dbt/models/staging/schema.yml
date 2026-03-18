@@ -1,0 +1,368 @@
+version: 2
+
+models:
+  # stg_discontinued_summer_sports
+  - name: stg_discontinued_summer_sports
+    description: >
+      Exploded view of discontinued Summer Olympic disciplines.
+      Each row represents one (discipline, year) combination.
+      Year ranges and discrete years are both expanded to individual rows.
+    columns:
+      - name: discipline
+        description: Name of the discontinued Olympic discipline.
+        tests:
+          - not_null
+
+      - name: contest_year
+        description: Individual Olympic year the discipline was contested.
+        tests:
+          - not_null
+
+      - name: number_of_olympics
+        description: Total number of Olympic editions the discipline appeared in.
+        tests:
+          - not_null
+
+      - name: gold_medals
+        description: Total gold medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: silver_medals
+        description: Total silver medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: bronze_medals
+        description: Total bronze medals awarded across all editions.
+        tests:
+          - not_null
+
+
+  # stg_medalists_age_by_sport
+  - name: stg_medalists_age_by_sport
+    description: >
+      Age-record milestones for Olympic medalists by sport.
+      Age expressed as decimal years (integer years + day fraction).
+    columns:
+      - name: medalist
+        description: Full name of the athlete who holds the age record.
+        tests:
+          - not_null
+
+      - name: age
+        description: >
+          Age at time of achievement in decimal years (e.g. 18.43 for
+          "18 years 158 days"). Rounded to 2 decimal places.
+        tests:
+          - not_null
+
+      - name: sport
+        description: Olympic sport the record belongs to.
+        tests:
+          - not_null
+
+      - name: title
+        description: Description of the age record (e.g. "Youngest freestyle skiing gold medalist").
+        tests:
+          - not_null
+
+      - name: details
+        description: Optional additional context. May be null.
+
+
+  # stg_summer_sports_medalist_by_olympiad
+  - name: stg_summer_sports_medalist_by_olympiad
+    description: >
+      Medal statistics for each Summer Olympic Games edition.
+      Host split into city and country. Footnote markers stripped.
+      Athlete columns show the first listed athlete only.
+    columns:
+      - name: games_year
+        description: Year the Summer Olympic Games were held.
+        tests:
+          - not_null
+          - unique
+
+      - name: host_city
+        description: Host city (text before the first comma in the raw host field).
+        tests:
+          - not_null
+
+      - name: host_country
+        description: >
+          Host country (text after the last comma, footnotes stripped).
+          Handles 1956 dual-host and 1976 three-part host string correctly.
+        tests:
+          - not_null
+
+      - name: number_medal_events
+        description: Number of medal events. Footnote markers stripped and cast to int.
+        tests:
+          - not_null
+
+      - name: number_of_gold_medals
+        description: Total gold medals awarded at this edition.
+        tests:
+          - not_null
+
+      - name: number_of_silver_medals
+        description: Total silver medals awarded at this edition.
+        tests:
+          - not_null
+
+      - name: number_of_bronze_medals
+        description: Total bronze medals awarded at this edition.
+        tests:
+          - not_null
+
+      - name: total
+        description: Computed total medals (gold + silver + bronze).
+        tests:
+          - not_null
+
+      - name: athlete_with_most_medals
+        description: Name of the first athlete listed as the top medalist.
+
+      - name: athlete_with_most_medals_country
+        description: IOC country code of the top medalist.
+
+      - name: athlete_with_most_gold_medals
+        description: Name of the first athlete listed as the top gold medalist.
+
+      - name: athlete_with_most_gold_medals_country
+        description: IOC country code of the top gold medalist.
+
+
+  # stg_summer_sports_medalist_by_sport
+  - name: stg_summer_sports_medalist_by_sport
+    description: >
+      Cumulative medal statistics for every Summer Olympic discipline.
+      Discipline names cleaned (parenthetical gender markers and double spaces removed).
+      Empty and "see list" athlete values nullified (Boxing, Cricket, Lacrosse, Surfing).
+    columns:
+      - name: discipline
+        description: Cleaned discipline name (parenthetical suffixes removed).
+        tests:
+          - not_null
+          - unique
+
+      - name: years_contested
+        description: >
+          Cleaned year range(s) string. Footnote markers and Season prefixes
+          stripped. Double spaces normalized.
+        tests:
+          - not_null
+
+      - name: number_of_olympics
+        description: Total Olympic editions the discipline appeared in.
+        tests:
+          - not_null
+
+      - name: number_of_medal_events
+        description: Number of distinct medal event types within the discipline.
+        tests:
+          - not_null
+
+      - name: number_of_gold_medals
+        description: Cumulative gold medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: number_of_silver_medals
+        description: Cumulative silver medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: number_of_bronze_medals
+        description: Cumulative bronze medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: total_medals
+        description: Computed total medals (gold + silver + bronze).
+        tests:
+          - not_null
+
+      - name: athlete_with_most_medals
+        description: >
+          Name of the first listed all-time top medalist.
+          Null for Boxing (empty), Cricket, Lacrosse, Surfing ("see list").
+
+      - name: athlete_with_most_medals_country
+        description: IOC country code of the all-time top medalist. May include dual codes e.g. "BUL, CRO".
+
+      - name: athlete_with_most_gold_medals
+        description: >
+          Name of the first listed all-time top gold medalist.
+          Null for Golf, Cricket, Lacrosse, Ski mountaineering ("see list").
+
+      - name: athlete_with_most_gold_medals_country
+        description: IOC country code of the all-time top gold medalist.
+
+
+  # stg_winter_sports_medalist_by_olympiad
+  - name: stg_winter_sports_medalist_by_olympiad
+    description: >
+      Medal statistics for each Winter Olympic Games edition.
+      Same structure as the Summer olympiad model.
+      number_medal_events is clean (no footnote markers in the Winter data).
+    columns:
+      - name: games_year
+        description: Year the Winter Olympic Games were held.
+        tests:
+          - not_null
+          - unique
+
+      - name: host_city
+        description: Host city (text before the first comma in the raw host field).
+        tests:
+          - not_null
+
+      - name: host_country
+        description: Host country (text after the last comma).
+        tests:
+          - not_null
+
+      - name: number_medal_events
+        description: Number of medal events at this Winter Games edition.
+        tests:
+          - not_null
+
+      - name: number_of_gold_medals
+        description: Total gold medals awarded at this edition.
+        tests:
+          - not_null
+
+      - name: number_of_silver_medals
+        description: Total silver medals awarded at this edition.
+        tests:
+          - not_null
+
+      - name: number_of_bronze_medals
+        description: Total bronze medals awarded at this edition.
+        tests:
+          - not_null
+
+      - name: total
+        description: Computed total medals (gold + silver + bronze).
+        tests:
+          - not_null
+
+      - name: athlete_with_most_medals
+        description: Name of the first athlete listed as the top medalist.
+
+      - name: athlete_with_most_medals_country
+        description: IOC country code of the top medalist.
+
+      - name: athlete_with_most_gold_medals
+        description: Name of the first athlete listed as the top gold medalist.
+
+      - name: athlete_with_most_gold_medals_country
+        description: IOC country code of the top gold medalist.
+
+
+  # stg_winter_sports_medalist_by_sport
+  - name: stg_winter_sports_medalist_by_sport
+    description: >
+      Cumulative medal statistics for every Winter Olympic discipline.
+      Footnote markers and Season prefixes stripped from years_contested.
+      Includes data-quality flags for known source errors:
+      Bobsleigh bronze=455 (should be 55) and Biathlon total mismatch.
+    columns:
+      - name: discipline
+        description: Winter Olympic discipline name.
+        tests:
+          - not_null
+          - unique
+
+      - name: years_contested
+        description: >
+          Cleaned year range(s). [a][b][c] footnotes and
+          "Summer:" / "Winter:" prefixes removed.
+        tests:
+          - not_null
+
+      - name: number_of_olympics
+        description: Total Winter Olympic editions the discipline appeared in.
+        tests:
+          - not_null
+
+      - name: number_of_medal_events
+        description: Number of distinct medal event types within the discipline.
+        tests:
+          - not_null
+
+      - name: number_of_gold_medals
+        description: Cumulative gold medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: number_of_silver_medals
+        description: Cumulative silver medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: number_of_bronze_medals
+        description: Cumulative bronze medals awarded across all editions.
+        tests:
+          - not_null
+
+      - name: total_medals
+        description: Computed total medals (gold + silver + bronze).
+        tests:
+          - not_null
+
+      - name: total_medals_computed
+        description: >
+          Raw total from source cast to int. Kept for audit.
+          Bobsleigh=166 and Biathlon=355 are known bad values in the source.
+
+      - name: has_total_mismatch
+        description: >
+          True when total_medals (computed) != total_medals_computed (raw).
+          Flags Bobsleigh (bronze typo 455→55) and Biathlon (total error).
+        tests:
+          - not_null
+          - accepted_values:
+              values: [true, false]
+
+      - name: athlete_with_most_medals
+        description: >
+          Name of the first listed all-time top medalist.
+          Null for Ski mountaineering ("see list").
+        tests:
+          - not_null:
+              where: "discipline != 'Ski mountaineering'"
+
+      - name: athlete_with_most_medals_country
+        description: IOC country code of the all-time top medalist.
+
+      - name: athlete_with_most_medals_gold
+        description: Gold medals in the top medalist's all-time tally.
+
+      - name: athlete_with_most_medals_silver
+        description: Silver medals in the top medalist's all-time tally.
+
+      - name: athlete_with_most_medals_bronze
+        description: Bronze medals in the top medalist's all-time tally.
+
+      - name: athlete_with_most_gold_medals
+        description: >
+          Name of the first listed all-time top gold medalist.
+          Null for Ski mountaineering ("see list").
+        tests:
+          - not_null:
+              where: "discipline != 'Ski mountaineering'"
+
+      - name: athlete_with_most_gold_medals_country
+        description: IOC country code of the all-time top gold medalist.
+
+      - name: athlete_with_most_gold_medals_gold
+        description: Gold medals in the top gold medalist's all-time tally.
+
+      - name: athlete_with_most_gold_medals_silver
+        description: Silver medals in the top gold medalist's all-time tally.
+
+      - name: athlete_with_most_gold_medals_bronze
+        description: Bronze medals in the top gold medalist's all-time tally.
