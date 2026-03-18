@@ -1,0 +1,54 @@
+season,discipline,number_of_olympics,number_of_gold_medals,number_of_silver_medals,number_of_bronze_medals,total_medals,athlete_with_most_medals,athlete_with_most_gold_medals
+Summer,Archery,18,76,74,66,216,Hubert van Innis,Hubert van Innis
+Summer,Rowing,29,282,282,286,850,Elisabeta Lipă,Elisabeta Lipă
+Summer,Rugby,7,10,11,7,28,Theresa Fitzpatrick,Theresa Fitzpatrick
+Summer,Sailing,29,205,197,190,592,Ben Ainslie,Ben Ainslie
+Summer,Shooting,28,302,303,301,906,Carl Osburn,Carl Osburn
+Summer,Skateboarding,2,8,8,8,24,Yuto Horigome,Yuto Horigome
+Summer,Surfing,2,4,4,4,12,,Italo Ferreira
+Summer,Swimming,30,633,632,631,1896,Michael Phelps,Michael Phelps
+Summer,Table tennis,10,42,42,46,130,Ma Long,Ma Long
+Summer,Taekwondo,7,56,56,96,208,Hwang Kyung-seon,Hwang Kyung-seon
+Summer,Tennis,17,76,76,91,243,Venus Williams,Venus Williams
+Summer,Triathlon,7,16,16,16,48,Alex Yee,Alex Yee
+Summer,Volleyball,16,48,48,48,144,Ana Fernández,Ana Fernández
+Summer,Water polo,28,36,35,35,106,Dezső Gyarmati,Dezső Gyarmati
+Summer,Weightlifting,27,238,235,236,709,Pyrros Dimas,Pyrros Dimas
+Summer,Wrestling,29,446,446,536,1428,Mijaín López,Mijaín López
+Summer,Modern pentathlon,26,44,44,44,132,Pavel Lednyov,András Balczó
+Summer,Lacrosse,2,2,2,1,5,,
+Summer,Sport climbing,2,6,6,6,18,Janja Garnbret,Janja Garnbret
+Summer,Handball,15,28,28,28,84,Katrine Lunde,Nikola Karabatić
+Summer,Artistic swimming,11,22,20,21,63,Svetlana Romashina,Svetlana Romashina
+Summer,Judo,15,167,166,334,667,Teddy Riner,Teddy Riner
+Summer,Badminton,9,44,44,48,136,Gao Ling,Gao Ling
+Summer,Baseball and Softball,6,11,11,11,33,Pedro Luis Lazo,Laura Berg
+Summer,Basketball,21,34,34,34,102,Diana Taurasi,Diana Taurasi
+Summer,Boxing,25,226,226,389,841,,
+Summer,Canoeing and Kayaking,21,258,258,260,776,Birgit Fischer,Birgit Fischer
+Summer,Cricket,1,1,1,0,2,,
+Summer,Athletics,30,1075,1084,1073,3232,Paavo Nurmi,Paavo Nurmi
+Summer,Diving,28,138,138,139,415,Dmitri Sautin,Wu Minxia
+Summer,Equestrian,28,159,157,157,473,Isabell Werth,Isabell Werth
+Summer,Fencing,30,235,235,234,704,Edoardo Mangiarotti,Aladár Gerevich
+Summer,Field hockey,25,37,37,38,112,Leslie Claudius,Leslie Claudius
+Summer,Football,29,36,36,38,110,Christie Rampone,Christie Rampone
+Summer,Golf,5,10,10,11,31,Lydia Ko,
+Summer,Gymnastics,30,392,372,378,1142,Larisa Latynina,Larisa Latynina
+Summer,Cycling,30,305,304,298,907,Jason Kenny,Jason Kenny
+Winter,Ski mountaineering,3,3,3,3,9,,
+Winter,Ski jumping,25,60,61,60,181,Matti Nykänen,Matti Nykänen
+Winter,Skeleton,9,17,17,17,51,Christopher Grotheer,Matt Weston
+Winter,Short track speed skating,11,74,74,74,222,Arianna Fontana,Viktor Ahn
+Winter,Nordic combined,25,43,43,43,129,Eric Frenzel,Jørgen Graabak
+Winter,Luge,17,57,55,56,168,Tobias Arlt,Tobias Arlt
+Winter,Ice hockey,25,34,34,34,102,Jayna Hefford,Jayna Hefford
+Winter,Cross-country skiing,25,182,180,182,544,Marit Bjørgen,Johannes Høsflot Klæbo
+Winter,Figure skating,25,101,100,100,301,Scott Moir,Scott Moir
+Winter,Curling,9,20,20,20,60,Agnes Knochenhauer,Agnes Knochenhauer
+Winter,Bobsleigh,24,57,54,455,566,Bogdan Musioł,Thorsten Margis
+Winter,Biathlon,22,108,108,106,322,Ole Einar Bjørndalen,Ole Einar Bjørndalen
+Winter,Alpine skiing,22,175,178,171,524,Kjetil André Aamodt,Kjetil André Aamodt
+Winter,Snowboarding,8,62,62,62,186,Zoi Sadowski-Synnott,Shaun White
+Winter,Freestyle skiing,10,73,73,74,220,Ailing Eileen Gu,Ailing Eileen Gu
+Winter,Speed skating,25,224,223,214,661,Ireen Wüst,Ireen Wüst

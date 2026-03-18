@@ -1,0 +1,12 @@
+astro
+.git
+.env
+airflow_settings.yaml
+logs/
+.venv
+airflow.db
+airflow.cfg
+dags/dbt-env/lib/
+dags/dbt-env/bin/
+dags/dbt-env/include/
+dags/dbt-env/share/
